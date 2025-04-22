@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import 'tailwindcss';
+
+.luckiest-guy-regular {
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.text-stroke {
+    --ts: 2px;
+    text-shadow:
+        var(--ts) var(--ts) 0 rgba(0, 0, 0, 1),               /* Top-Left */
+        calc(-1 * var(--ts)) var(--ts) 0 rgba(0, 0, 0, 1),       /* Top-Right */
+        var(--ts) calc(-1 * var(--ts)) 0 rgba(0, 0, 0, 1),       /* Bottom-Left */
+        calc(-1 * var(--ts)) calc(-1 * var(--ts)) 0 rgba(0, 0, 0, 1), /* Bottom-Right */
+        0 var(--ts) 0 rgba(0, 0, 0, 1),                          /* Top */
+        0 calc(-1 * var(--ts)) 0 rgba(0, 0, 0, 1),               /* Bottom */
+        var(--ts) 0 0 rgba(0, 0, 0, 1),                          /* Left */
+        calc(-1 * var(--ts)) 0 0 rgba(0, 0, 0, 1);               /* Right */
+}
+
+
+html {
+    --s: 37px;
+    /* control the size */
+
+    --c: #0000, #005FBF
+        /* first color */
+        .5deg 119.5deg, #0000 120deg;
+    --g1: conic-gradient(from 60deg at 56.25% calc(425%/6), var(--c));
+    --g2: conic-gradient(from 180deg at 43.75% calc(425%/6), var(--c));
+    --g3: conic-gradient(from -60deg at 50% calc(175%/12), var(--c));
+    background:
+        var(--g1), var(--g1) var(--s) calc(1.73*var(--s)),
+        var(--g2), var(--g2) var(--s) calc(1.73*var(--s)),
+        var(--g3) var(--s) 0, var(--g3) 0 calc(1.73*var(--s)) #006AD4;
+    /* second color */
+    background-size: calc(2*var(--s)) calc(3.46*var(--s));
+}
+
+* {
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    display: block;
+    /* Vignette: transparent center, dark edges */
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%);
+    /* Make sure it covers everything */
+    width: 100vw;
+    height: 100vh;
+}
+
+@theme {
+    --color-main: #436FA7;
+    --color-darker-blue: #2D496F;
+    --color-gold: #FFD000;
+    --color-bg: #6598D9;
+}

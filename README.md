@@ -1,39 +1,38 @@
-# BTD6ParagonCalculator
+# sv
 
-[![Deploy static content to GH Pages](https://github.com/Kaister300/BTD6ParagonCalculator/actions/workflows/deploy-gh-pages.yaml/badge.svg)](https://github.com/Kaister300/BTD6ParagonCalculator/actions/workflows/deploy-gh-pages.yaml)
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-## Overview
-A simple web application to caclulate the approximate power of a BTD6 paragon based on in game factors. 
-The webpage is situated in the project directory under webpage. An express server, `app.mjs`, has been included to run the page locally.
+## Creating a project
 
-## Webpage Location
-The webpage is being hosted through Github Pages at the following address:
-
-https://kaister300.github.io/BTD6ParagonCalculator/
-
-
-## Getting Started
-Node.js will only be used to run the express server.
+If you're seeing this, you've probably already done this step. Congrats!
 
 ```bash
-npm install
+# create a new project in the current directory
+npx sv create
+
+# create a new project in my-app
+npx sv create my-app
 ```
 
-Using the following commands will start the server:
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
-npm start
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-OR
+## Building
+
+To create a production version of your app:
 
 ```bash
-node project/app.mjs
+npm run build
 ```
 
+You can preview the production build with `npm run preview`.
 
-## Building Site
-Building the website requires Python3 and the `python-dotenv` package from pip. The build script can be run using:
-```bash
-py project/make.py
-```
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
