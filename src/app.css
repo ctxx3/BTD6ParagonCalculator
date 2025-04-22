@@ -20,6 +20,12 @@
         calc(-1 * var(--ts)) 0 0 rgba(0, 0, 0, 1);               /* Right */
 }
 
+.icon-stroke{
+    stroke: black;
+    stroke-width: 8em;
+    paint-order: stroke fill;
+}
+
 
 html {
     --s: 37px;

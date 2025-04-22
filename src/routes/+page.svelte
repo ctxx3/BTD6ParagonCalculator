@@ -1,10 +1,11 @@
 <script lang="ts">
     import { degreeCalc, PARAGON_LEVELS, powerCalc } from "$lib/paragon-calc";
     import { onMount } from "svelte";
+    import { base } from "$app/paths";
     const inputFields = [
         {
             key: "tier5Towers",
-            label: "Tier 5 Towers",
+            label: "Extra Tier 5 Towers",
             min: 0,
             max: 9,
             tooltip: "Tier 5 Towers (excluding initial 3).",
@@ -13,7 +14,7 @@
             key: "upgrades",
             label: "Upgrades",
             min: 0,
-            max: 999,
+            max: 100,
             tooltip: "All upgrade tiers spent on towers excluding Tier 5s. Max 100.",
         },
         {
@@ -39,17 +40,17 @@
         },
         {
             key: "cashInjections",
-            label: "Cash Injections",
+            label: "Cash Slider",
             min: 0,
             max: 10000000,
             tooltip: "Allowed cash injection for the paragon. 3.15x base cost.",
         },
         {
             key: "powerTotems",
-            label: "Power Totems",
+            label: "Paragon totems",
             min: 0,
             max: 999,
-            tooltip: "No max cap for paragon power.",
+            tooltip: "",
         },
     ];
 
@@ -81,10 +82,7 @@
     });
 
     function calculateLevel() {
-        // Placeholder: replace with real calculation logic
-        const tower = towers.find(
-            (tower) => tower.id === formData.selectedTower
-        );
+        const tower = towers.find((tower) => tower.id === formData.selectedTower);
         if (!tower) {
             return {
                 level: 0,
@@ -115,7 +113,7 @@
     });
 
     onMount(() => {
-        fetch("/json/paragons.json")
+        fetch(`${base}/json/paragons.json`)
             .then((r) => r.json())
             .then((data) => (towers = data))
             .catch(console.error);
@@ -139,7 +137,7 @@
             </h2>
             <!-- Tower Selection -->
             <div>
-                <h3 class="font-medium mb-1 text-white text-stroke">Select Tower</h3>
+                <h3 class="font-medium mb-1 text-white text-stroke">Selected Tower: {towers.find((tower) => tower.id === formData.selectedTower)?.name}</h3>
                 <div class="flex gap-2 overflow-x-auto py-2">
                     {#if towers.length > 0}
                         {#each towers as tower}
@@ -152,7 +150,7 @@
                                     class="sr-only"
                                 />
                                 <div
-                                    style="background-image: url({tower.image});"
+                                    style="background-image: url({base + tower.image});"
                                     class={`bg-darker-blue w-12 h-12 md:w-14 md:h-14 bg-center bg-contain bg-no-repeat rounded-lg border-2 transition-all duration-150 ${formData.selectedTower === tower.id ? "border-gold ring-2 ring-gold scale-105" : "border-gold hover:border-gold"}`}
                                 ></div>
                                 <span class="text-xs text-stroke text-center mt-1 text-white truncate w-14">{tower.name}</span>
@@ -187,17 +185,16 @@
                 </div>
                 {#each inputFields as field}
                     <div class="flex flex-col">
-                        <div class="flex items-center gap-1">
+                        <div class="flex gap-1">
                             <label for={field.key} class="font-medium text-stroke">{field.label}</label>
-                            <span class="group relative">
-                                <svg class="w-3 h-3 text-gray-400 cursor-pointer" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M12 16v-4M12 8h.01" />
-                                </svg>
-                                <div class="absolute z-10 hidden group-hover:block bg-black text-white text-xs rounded p-2 w-40 left-1/2 -translate-x-1/2 mt-1 shadow-lg">
-                                    {field.tooltip}
-                                </div>
-                            </span>
+                            {#if field.tooltip !== ""}
+                                <span class="group relative">
+                                    <span class="ms-1 cursor-pointer text-stroke text-[#00DDFF]">?</span>
+                                    <div class="absolute z-10 hidden group-hover:block bg-black text-white rounded p-2 w-40 left-1/2 -translate-x-1/2 mt-1 shadow-lg">
+                                        {field.tooltip}
+                                    </div>
+                                </span>
+                            {/if}
                         </div>
                         <input
                             type="number"
