@@ -1,38 +1,70 @@
-# sv
+# 🎯 BTD6 Paragon Calculator
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+[![GitHub stars](https://img.shields.io/github/stars/ctxx3/BTD6ParagonCalculator?style=flat-square)](https://github.com/ctxx3/BTD6ParagonCalculator/stargazers)
+[![License](https://img.shields.io/github/license/ctxx3/BTD6ParagonCalculator?style=flat-square)](LICENSE)
+[![Deploy](https://img.shields.io/github/deployments/ctxx3/BTD6ParagonCalculator/github-pages?label=deployed&style=flat-square)](https://ctxx3.github.io/BTD6ParagonCalculator/)
 
-## Creating a project
+A blazing-fast, SvelteKit-powered calculator for BTD6 Paragon degrees.
 
-If you're seeing this, you've probably already done this step. Congrats!
+> **Forked from [Kaister300/BTD6ParagonCalculator](https://github.com/Kaister300/BTD6ParagonCalculator). This fork features a complete SvelteKit rewrite and improved UX.**
 
-```bash
-# create a new project in the current directory
-npx sv create
+---
 
-# create a new project in my-app
-npx sv create my-app
-```
+## 🚀 Quick Start
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Clone and run locally with [bun](https://bun.sh):
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+git clone https://github.com/ctxx3/BTD6ParagonCalculator
+cd BTD6ParagonCalculator
+bun install
+bun run dev
 ```
 
-## Building
-
-To create a production version of your app:
+Build for production:
 
 ```bash
-npm run build
+bun run build
 ```
 
-You can preview the production build with `npm run preview`.
+> Prefer npm or yarn? Swap out `bun` for your favorite Node.js package manager!
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+---
+
+## �️ Preview
+
+![Screenshot of BTD6 Paragon Calculator](https://raw.githubusercontent.com/ctxx3/BTD6ParagonCalculator/main/.github/screenshot.png)
+
+---
+
+## ✨ Features
+
+- � **Modern SvelteKit frontend**
+- 🛡️ **TypeScript** for type safety
+- 🎨 **Tailwind CSS** for responsive UI
+- ⚡ **Instant feedback** and smooth user experience
+
+---
+
+## � Project Structure
+
+```
+.
+├── src/           # SvelteKit source code
+├── static/        # Static assets (icons, JSON, etc.)
+├── package.json   # Project metadata and scripts
+└── README.md      # This file
+```
+
+---
+
+## 🙏 Credits
+
+- Original project by [Kaister300](https://github.com/Kaister300/BTD6ParagonCalculator)
+- Fork & SvelteKit rewrite by [Ctx3](https://github.com/ctxx3)
+
+---
+
+## 📄 License
+
+MIT License. See [LICENSE](LICENSE) for details.
