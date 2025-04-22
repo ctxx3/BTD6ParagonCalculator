@@ -1,2 +1,3 @@
 User-agent: *
-Disallow:
+Allow: /
+Sitemap: https://ctxx3.github.io/BTD6ParagonCalculator/sitemap.xml
