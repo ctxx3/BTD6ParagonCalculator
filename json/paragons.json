@@ -2,6 +2,7 @@
     {
         "id": 0,
         "name": "Apex Plasma Master",
+        "tower": "Dart",
         "image": "/icons/apex.webp",
         "prices": {
             "easy": 127500,
@@ -13,28 +14,19 @@
     {
         "id": 1,
         "name": "Glaive Dominus",
+        "tower": "Boomerang",
         "image": "/icons/glaive.webp",
         "prices": {
-            "easy": 233750,
-            "medium": 275000,
-            "hard": 297000,
-            "impoppable": 330000
+            "easy": 212500,
+            "medium": 250000,
+            "hard": 270000,
+            "impoppable": 300000
         }
     },
     {
         "id": 2,
-        "name": "Master Builder",
-        "image": "/icons/master.webp",
-        "prices": {
-            "easy": 552500,
-            "medium": 650000,
-            "hard": 702000,
-            "impoppable": 780000
-        }
-    },
-    {
-        "id": 3,
         "name": "Crucible of Steel and Flame",
+        "tower": "Tack",
         "image": "/icons/cyclone.webp",
         "prices": {
             "easy": 170000,
@@ -44,8 +36,9 @@
         }
     },
     {
-        "id": 4,
+        "id": 3,
         "name": "Nautic Siege Core",
+        "tower": "Sub",
         "image": "/icons/nautic.webp",
         "prices": {
             "easy": 340000,
@@ -55,8 +48,9 @@
         }
     },
     {
-        "id": 5,
+        "id": 4,
         "name": "Navarch of the Seas",
+        "tower": "Buccaneer",
         "image": "/icons/navarch.webp",
         "prices": {
             "easy": 467500,
@@ -66,8 +60,9 @@
         }
     },
     {
-        "id": 6,
+        "id": 5,
         "name": "Goliath Doomship",
+        "tower": "Ace",
         "image": "/icons/goliath.webp",
         "prices": {
             "easy": 765000,
@@ -77,8 +72,9 @@
         }
     },
     {
-        "id": 7,
+        "id": 6,
         "name": "Magus Perfectus",
+        "tower": "Wizard",
         "image": "/icons/magus.webp",
         "prices": {
             "easy": 637500,
@@ -88,14 +84,39 @@
         }
     },
     {
-        "id": 8,
+        "id": 7,
         "name": "Ascended Shadow",
+        "tower": "Ninja",
         "image": "/icons/ascended.webp",
         "prices": {
             "easy": 425000,
             "medium": 500000,
             "hard": 540000,
             "impoppable": 600000
+        }
+    },
+    {
+        "id": 8,
+        "name": "Mega Massive Munitions Factory",
+        "tower": "Spike",
+        "image": "/icons/spike.webp",
+        "prices": {
+            "easy": 680000,
+            "medium": 800000,
+            "hard": 864000,
+            "impoppable": 9600000
+        }
+    },
+    {
+        "id": 9,
+        "name": "Master Builder",
+        "tower": "Engineer",
+        "image": "/icons/master.webp",
+        "prices": {
+            "easy": 552500,
+            "medium": 650000,
+            "hard": 702000,
+            "impoppable": 780000
         }
     }
 ]
