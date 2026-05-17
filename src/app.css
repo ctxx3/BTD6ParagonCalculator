@@ -8,16 +8,8 @@
 }
 
 .text-stroke {
-    --ts: 2px;
-    text-shadow:
-        var(--ts) var(--ts) 0 rgba(0, 0, 0, 1),               /* Top-Left */
-        calc(-1 * var(--ts)) var(--ts) 0 rgba(0, 0, 0, 1),       /* Top-Right */
-        var(--ts) calc(-1 * var(--ts)) 0 rgba(0, 0, 0, 1),       /* Bottom-Left */
-        calc(-1 * var(--ts)) calc(-1 * var(--ts)) 0 rgba(0, 0, 0, 1), /* Bottom-Right */
-        0 var(--ts) 0 rgba(0, 0, 0, 1),                          /* Top */
-        0 calc(-1 * var(--ts)) 0 rgba(0, 0, 0, 1),               /* Bottom */
-        var(--ts) 0 0 rgba(0, 0, 0, 1),                          /* Left */
-        calc(-1 * var(--ts)) 0 0 rgba(0, 0, 0, 1);               /* Right */
+    -webkit-text-stroke: 6px black;
+    paint-order: stroke fill;
 }
 
 .icon-stroke{
@@ -29,19 +21,17 @@
 
 html {
     --s: 37px;
-    /* control the size */
+    --bg-pattern-mid: #005FBF;
+    --bg-pattern-fill: #006AD4;
 
-    --c: #0000, #005FBF
-        /* first color */
-        .5deg 119.5deg, #0000 120deg;
+    --c: #0000, var(--bg-pattern-mid) .5deg 119.5deg, #0000 120deg;
     --g1: conic-gradient(from 60deg at 56.25% calc(425%/6), var(--c));
     --g2: conic-gradient(from 180deg at 43.75% calc(425%/6), var(--c));
     --g3: conic-gradient(from -60deg at 50% calc(175%/12), var(--c));
     background:
         var(--g1), var(--g1) var(--s) calc(1.73*var(--s)),
         var(--g2), var(--g2) var(--s) calc(1.73*var(--s)),
-        var(--g3) var(--s) 0, var(--g3) 0 calc(1.73*var(--s)) #006AD4;
-    /* second color */
+        var(--g3) var(--s) 0, var(--g3) 0 calc(1.73*var(--s)) var(--bg-pattern-fill);
     background-size: calc(2*var(--s)) calc(3.46*var(--s));
 }
 
@@ -69,8 +59,25 @@ body::before {
     --color-main: #436FA7;
     --color-darker-blue: #2D496F;
     --color-gold: #FFD000;
-    --color-bg: #6598D9;
     --color-accent: #00DDFF;
+
+    /* Card chrome */
+    --color-card-base: #4B81D1;
+    --color-card-highlight: #689BDA;
+    --color-card-border: #76AEE6;
+    --color-card-shadow: #3B4E7A;
+    --color-section-border: #375D8D;
+
+    /* Tower selection card */
+    --color-tower-light: #0088CB;
+    --color-tower-dark: #221149;
+    --color-tower-border: #0C121F;
+    --color-tower-shadow: #002358;
+
+    /* Paragon degree / slider */
+    --color-purple: #AF00F2;
+    --color-purple-light: #735EE4;
+    --color-slider-track: #352112;
 }
 
 /* Minimal vendor styles for the range thumb (keeps custom thumb image and basic shadow) */
@@ -88,7 +95,7 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: transparent;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
   border: none;
-  margin-top: -10px;
+  margin-top: 0;
 }
 input[type="range"]::-moz-range-track {
   background: transparent;

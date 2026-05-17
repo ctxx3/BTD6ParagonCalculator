@@ -31,10 +31,10 @@
         return getIcon(imagePath.split("/").pop() ?? "");
     }
 
-    const inputFields = [
+    const towerStatsFields = [
         {
             key: "tier5Towers",
-            label: "Extra Tier 5 Towers",
+            label: "Extra Tier 5s",
             min: 0,
             max: 9,
             tooltip: "Tier 5 Towers (excluding initial 3).",
@@ -54,6 +54,16 @@
             tooltip: "Bloons popped from every tower of the paragon type.",
         },
         {
+            key: "powerTotems",
+            label: "Totems",
+            min: 0,
+            max: 100,
+            tooltip: "Paragon power totems placed.",
+        },
+    ];
+
+    const cashFields = [
+        {
             key: "cashSpent",
             label: "Cash Spent",
             min: 0,
@@ -69,19 +79,14 @@
         },
         {
             key: "cashInjections",
-            label: "Cash Slider",
+            label: "Cash Injection",
             min: 0,
             max: 10000000,
             tooltip: "Allowed cash injection for the paragon. 3.15x base cost.",
         },
-        {
-            key: "powerTotems",
-            label: "Paragon totems",
-            min: 0,
-            max: 100,
-            tooltip: "",
-        },
     ];
+
+    const inputFields = [...towerStatsFields, ...cashFields];
 
     let formData = $state({
         selectedTower: 1,
@@ -158,13 +163,6 @@
     }
 
     $effect(() => {
-        const max = getFieldMax("cashInjections");
-        if (formData.cashInjections > max) {
-            formData.cashInjections = max;
-        }
-    });
-
-    $effect(() => {
         results = calculateLevel();
     });
 
@@ -176,42 +174,40 @@
     });
 </script>
 
-<div class="min-h-screen p-2 md:p-6 flex items-center flex-col">
-    <enhanced:img
-        src={getIcon("paragonicon.webp")}
-        alt="BTD6 Logo"
-        class="w-24 md:w-42 mb-4"
-        fetchpriority="high"
-    />
-    <h1
-        class="text-3xl md:text-5xl font-bold text-white text-stroke text-center mb-4"
-    >
-        BTD6 Paragon Calculator
-    </h1>
-    <div class="flex flex-col w-full max-w-5xl mx-auto gap-4 md:flex-row">
-        <!-- Inputs Card -->
-        <div
-            class="md:w-1/2 bg-main rounded-xl shadow-lg p-3 md:p-5 flex flex-col gap-3"
+<div class="min-h-screen p-2 md:p-4 flex items-center flex-col">
+    <header class="flex items-center gap-3 mb-4">
+        <enhanced:img
+            src={getIcon("paragonicon.webp")}
+            alt=""
+            class="w-16 md:w-20"
+            fetchpriority="high"
+        />
+        <h1
+            class="text-2xl md:text-4xl font-bold text-white text-stroke leading-tight"
         >
-            <h2
-                class="text-lg md:text-xl font-semibold mb-2 text-white text-stroke flex items-center gap-2"
-            >
-                Tower & Parameters
-            </h2>
-            <!-- Tower Selection -->
-            <div>
-                <h3 class="font-medium mb-1 text-white text-stroke">
-                    Selected Tower: <span class="text-gold"
-                        >{towers.find(
-                            (tower) => tower.id === formData.selectedTower,
-                        )?.name}</span
-                    >
-                </h3>
-                <div class="grid grid-cols-4 sm:grid-cols-5 gap-3 py-2">
+            BTD6 Paragon Calculator
+        </h1>
+    </header>
+    <div class="flex flex-col w-full max-w-5xl mx-auto gap-3">
+      <div class="flex flex-col gap-3 md:flex-row">
+        <!-- Tower Selection Card -->
+        <div
+            class="md:w-1/2 bg-linear-to-t from-card-base to-card-highlight rounded-xl border-2 border-card-border shadow-[0_0_0_2px_var(--color-card-shadow),0_4px_8px_rgba(0,0,0,0.3)] p-3 md:p-4 flex flex-col gap-3"
+        >
+            <h3 class="font-medium text-white text-stroke">
+                Tower: <span class="text-gold"
+                    >{towers.find(
+                        (tower) => tower.id === formData.selectedTower,
+                    )?.name ?? ""}</span
+                >
+            </h3>
+            <div class="p-3 bg-main rounded-lg border-t-2 border-x-2 border-section-border flex-1">
+                <div class="grid grid-cols-5 gap-2">
                     {#if towers.length > 0}
                         {#each towers as tower}
                             <label
-                                class="relative cursor-pointer flex flex-col items-center"
+                                class="relative cursor-pointer flex items-center justify-center"
+                                title={tower.name}
                             >
                                 <input
                                     type="radio"
@@ -221,131 +217,151 @@
                                     class="sr-only"
                                 />
                                 <div
-                                    class={`bg-darker-blue w-full aspect-square rounded-lg border-2 border-gold transition-all duration-150 flex items-center justify-center p-1 ${formData.selectedTower === tower.id ? "ring-2 ring-gold scale-105" : ""}`}
+                                    class={`relative w-full aspect-4/5 rounded-lg border-2 border-tower-border shadow-[0_0_0_1px_var(--color-tower-shadow)] bg-linear-to-t from-tower-light via-tower-dark to-tower-dark transition-all duration-150 overflow-visible ${formData.selectedTower === tower.id ? "ring-2 ring-gold scale-105" : ""}`}
                                 >
                                     <enhanced:img
                                         src={getTowerIcon(tower.image)}
                                         alt={tower.name}
-                                        class="h-full w-full object-contain"
+                                        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[115%] max-w-none object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.6)] pointer-events-none"
                                         loading="lazy"
                                     />
                                 </div>
                             </label>
                         {/each}
                     {:else}
-                        <!-- Skeleton placeholders for tower icons -->
                         {#each Array(10) as _}
                             <div
-                                class="flex flex-col items-center animate-pulse"
-                            >
-                                <div
-                                    class="w-14 h-14 md:w-16 md:h-16 bg-gray-200 rounded-lg mb-1"
-                                ></div>
-                                <div class="w-12 h-3 bg-gray-200 rounded"></div>
-                            </div>
+                                class="w-full aspect-4/5 rounded-lg border-2 border-tower-border shadow-[0_0_0_1px_var(--color-tower-shadow)] bg-linear-to-t from-tower-light/60 to-tower-dark/60 animate-pulse"
+                            ></div>
                         {/each}
                     {/if}
                 </div>
             </div>
-            <!-- Input Form -->
-            <form class="grid grid-cols-1 md:grid-cols-2 gap-3 text-white">
-                <div class="flex flex-col">
-                    <div class="flex items-center justify-between">
-                        <label
-                            for="difficulty"
-                            class="font-medium mb-1 text-stroke"
-                            >Difficulty</label
-                        >
-                        <span class="text-accent text-stroke"
-                            >{formData.difficulty}</span
-                        >
-                    </div>
-                    <div class="grid grid-cols-4 gap-3">
-                        {#each ["easy", "medium", "hard", "impoppable"] as difficulty}
-                            <label
-                                class="relative cursor-pointer flex flex-col items-center"
-                            >
-                                <input
-                                    type="radio"
-                                    name="difficulty"
-                                    value={difficulty}
-                                    bind:group={formData.difficulty}
-                                    class="sr-only"
-                                />
-                                <div
-                                    class={`bg-darker-blue w-full aspect-square rounded-lg border-2 border-gold transition-all duration-150 flex items-center justify-center p-1 ${formData.difficulty === difficulty ? "ring-2 ring-gold scale-105" : ""}`}
-                                >
-                                    <enhanced:img
-                                        src={getIcon(`${difficulty}.webp`)}
-                                        alt={`${difficulty} difficulty`}
-                                        class="h-full w-full object-contain"
-                                        loading="lazy"
-                                    />
-                                </div>
-                            </label>
-                        {/each}
-                    </div>
-                </div>
-                {#each inputFields as field}
-                    <div class="flex flex-col">
-                        <Slider
-                            bind:value={
-                                formData[
-                                    field.key as keyof typeof formData
-                                ] as number
-                            }
-                            max={getFieldMax(field.key)}
-                            label={field.label}
-                            description={field.tooltip}
-                        />
-                    </div>
-                {/each}
-            </form>
         </div>
-        <!-- Results Card -->
+
+        <!-- Parameters Card -->
         <div
-            class="md:w-1/2 bg-main rounded-xl shadow-lg p-3 md:p-5 flex flex-col gap-3 justify-between text-white"
+            class="md:w-1/2 bg-linear-to-t from-card-base to-card-highlight rounded-xl border-2 border-card-border shadow-[0_0_0_2px_var(--color-card-shadow),0_4px_8px_rgba(0,0,0,0.3)] p-3 md:p-4 flex flex-col gap-3"
         >
-            <div>
-                <h2
-                    class="text-lg md:text-xl font-semibold mb-2 flex items-center gap-2 text-stroke"
+            <!-- Difficulty chip row -->
+            <h3 class="font-medium text-white text-stroke">
+                Difficulty: <span class="text-gold capitalize"
+                    >{formData.difficulty}</span
                 >
-                    Calculation Results
-                </h2>
-                <div
-                    class="p-3 bg-linear-to-r bg-darker-blue rounded-lg mb-2 flex flex-col items-center"
-                >
-                    <div class="text-base font-medium">Estimated Degree</div>
-                    <div
-                        class="text-3xl font-extrabold tracking-tight text-accent"
-                    >
-                        {results.level}
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-2 mb-2">
-                    <div
-                        class="p-2 bg-darker-blue rounded-lg flex flex-col items-center"
-                    >
-                        <div class="text-xs font-medium">Current Power</div>
-                        <div class="text-lg font-semibold text-accent">
-                            {results.currDegree.toLocaleString()}
-                        </div>
-                    </div>
-                    <div
-                        class="p-2 bg-darker-blue rounded-lg flex flex-col items-center"
-                    >
-                        <div class="text-xs font-medium">Progress to Next</div>
-                        <div class="text-lg font-semibold text-accent">
-                            {results.nextDegree?.toLocaleString()}
-                        </div>
-                    </div>
+            </h3>
+            <div class="p-3 bg-main rounded-lg border-t-2 border-x-2 border-section-border">
+                <div class="grid grid-cols-4 gap-2">
+                    {#each ["easy", "medium", "hard", "impoppable"] as difficulty}
+                        <label
+                            class="relative cursor-pointer"
+                            title={difficulty}
+                        >
+                            <input
+                                type="radio"
+                                name="difficulty"
+                                value={difficulty}
+                                bind:group={formData.difficulty}
+                                class="sr-only"
+                            />
+                            <div
+                                class={`bg-darker-blue h-11 rounded-lg border-2 border-gold transition-all duration-150 flex items-center justify-center overflow-hidden p-1 ${formData.difficulty === difficulty ? "ring-2 ring-gold scale-105" : ""}`}
+                            >
+                                <enhanced:img
+                                    src={getIcon(`${difficulty}.webp`)}
+                                    alt={difficulty}
+                                    class="max-h-full max-w-full object-contain"
+                                    loading="lazy"
+                                />
+                            </div>
+                        </label>
+                    {/each}
                 </div>
             </div>
+
+            <!-- Tower Stats group -->
+            <h3 class="font-medium text-white text-stroke">
+                Tower Stats
+            </h3>
+            <div class="p-3 bg-main rounded-lg border-t-2 border-x-2 border-section-border flex flex-col gap-2">
+                {#each towerStatsFields as field}
+                    <Slider
+                        bind:value={
+                            formData[
+                                field.key as keyof typeof formData
+                            ] as number
+                        }
+                        max={getFieldMax(field.key)}
+                        label={field.label}
+                        description={field.tooltip}
+                    />
+                {/each}
+            </div>
+
+            <!-- Cash group -->
+            <h3 class="font-medium text-white text-stroke">
+                Cash
+            </h3>
+            <div class="p-3 bg-main rounded-lg border-t-2 border-x-2 border-section-border flex flex-col gap-2">
+                {#each cashFields as field}
+                    <Slider
+                        bind:value={
+                            formData[
+                                field.key as keyof typeof formData
+                            ] as number
+                        }
+                        max={getFieldMax(field.key)}
+                        label={field.label}
+                        description={field.tooltip}
+                    />
+                {/each}
+            </div>
         </div>
+      </div>
+
+      <!-- Results Card (full width, bottom) -->
+      <div
+          class="bg-linear-to-t from-card-base to-card-highlight rounded-xl border-2 border-card-border shadow-[0_0_0_2px_var(--color-card-shadow),0_4px_8px_rgba(0,0,0,0.3)] p-3 md:p-4 flex flex-col gap-3 text-white"
+      >
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 items-stretch">
+              <div
+                  class="p-3 bg-main rounded-lg border-t-2 border-x-2 border-section-border flex flex-col items-center justify-center gap-1"
+              >
+                  <div class="text-sm font-medium text-stroke">
+                      Estimated Degree
+                  </div>
+                  <div
+                      class="text-4xl font-extrabold tracking-tight leading-none bg-linear-to-t from-purple-light to-purple bg-clip-text text-transparent drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)]"
+                      style="-webkit-text-stroke: 1.5px black; paint-order: stroke fill;"
+                  >
+                      {results.level}
+                  </div>
+              </div>
+              <div
+                  class="p-3 bg-main rounded-lg border-t-2 border-x-2 border-section-border flex flex-col items-center justify-center gap-1"
+              >
+                  <div class="text-sm font-medium text-stroke">
+                      Current Power
+                  </div>
+                  <div class="text-3xl font-extrabold tracking-tight text-accent text-stroke leading-none">
+                      {results.currDegree.toLocaleString()}
+                  </div>
+              </div>
+              <div
+                  class="p-3 bg-main rounded-lg border-t-2 border-x-2 border-section-border flex flex-col items-center justify-center gap-1"
+              >
+                  <div class="text-sm font-medium text-stroke">
+                      Next Degree In
+                  </div>
+                  <div class="text-3xl font-extrabold tracking-tight text-accent text-stroke leading-none">
+                      {(results.nextDegree? (results.nextDegree - results.currDegree): 0).toLocaleString()}
+                  </div>
+              </div>
+          </div>
+      </div>
     </div>
-    <div class="mt-4 text-center text-white text-stroke">
+    <footer class="mt-3 text-center text-white text-stroke">
         <p>
-            Created by <a
+            By <a
                 href="https://github.com/ctxx3"
                 class="text-blue-400 hover:text-lg duration-75">Ctx3</a
             >
@@ -355,5 +371,5 @@
                 class="text-blue-400 hover:text-lg duration-75">Kaister300</a
             >.
         </p>
-    </div>
+    </footer>
 </div>
