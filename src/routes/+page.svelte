@@ -1,8 +1,36 @@
 <script lang="ts">
     import { degreeCalc, PARAGON_LEVELS, powerCalc } from "$lib/paragon-calc";
-    import { onMount, tick } from "svelte";
+    import { onMount } from "svelte";
     import { base } from "$app/paths";
     import Slider from "../components/slider.svelte";
+    import type { Picture } from "@sveltejs/enhanced-img";
+
+    const iconModules = import.meta.glob(
+        ["/src/lib/assets/icons/*.webp", "!/src/lib/assets/icons/thumb.webp"],
+        {
+            eager: true,
+            query: {
+                enhanced: true,
+            },
+            import: "default",
+        },
+    ) as Record<string, Picture>;
+
+    const icons = Object.fromEntries(
+        Object.entries(iconModules).map(([path, image]) => [
+            path.split("/").pop(),
+            image,
+        ]),
+    ) as Record<string, Picture>;
+
+    function getIcon(fileName: string) {
+        return icons[fileName] ?? icons["paragonicon.webp"];
+    }
+
+    function getTowerIcon(imagePath: string) {
+        return getIcon(imagePath.split("/").pop() ?? "");
+    }
+
     const inputFields = [
         {
             key: "tier5Towers",
@@ -153,10 +181,11 @@
 </script>
 
 <div class="min-h-screen p-2 md:p-6 flex items-center flex-col">
-    <img
-        src="icons/paragonicon.webp"
+    <enhanced:img
+        src={getIcon("paragonicon.webp")}
         alt="BTD6 Logo"
         class="w-24 md:w-42 mb-4"
+        fetchpriority="high"
     />
     <h1
         class="text-3xl md:text-5xl font-bold text-white text-stroke text-center mb-4"
@@ -196,10 +225,15 @@
                                     class="sr-only"
                                 />
                                 <div
-                                    style="background-image: url({base +
-                                        tower.image});"
-                                    class={`bg-darker-blue w-full aspect-[1/1] bg-center bg-contain bg-no-repeat rounded-lg border-2 transition-all duration-150 ${formData.selectedTower === tower.id ? "border-gold ring-2 ring-gold scale-105" : "border-gold hover:border-gold"}`}
-                                ></div>
+                                    class={`bg-darker-blue w-full aspect-[1/1] rounded-lg border-2 transition-all duration-150 flex items-center justify-center p-1 ${formData.selectedTower === tower.id ? "border-gold ring-2 ring-gold scale-105" : "border-gold hover:border-gold"}`}
+                                >
+                                    <enhanced:img
+                                        src={getTowerIcon(tower.image)}
+                                        alt={tower.name}
+                                        class="h-full w-full object-contain"
+                                        loading="lazy"
+                                    />
+                                </div>
                             </label>
                         {/each}
                     {:else}
@@ -238,16 +272,21 @@
                             >
                                 <input
                                     type="radio"
-                                    name="tower"
+                                    name="difficulty"
                                     value={difficulty}
                                     bind:group={formData.difficulty}
                                     class="sr-only"
                                 />
                                 <div
-                                    style="background-image: url({base +
-                                        `/icons/${difficulty}.webp`});"
-                                    class={`bg-darker-blue w-full aspect-square bg-center bg-contain bg-no-repeat rounded-lg border-2 transition-all duration-150 ${formData.difficulty === difficulty ? "border-gold ring-2 ring-gold scale-105" : "border-gold hover:border-gold"}`}
-                                ></div>
+                                    class={`bg-darker-blue w-full aspect-square rounded-lg border-2 transition-all duration-150 flex items-center justify-center p-1 ${formData.difficulty === difficulty ? "border-gold ring-2 ring-gold scale-105" : "border-gold hover:border-gold"}`}
+                                >
+                                    <enhanced:img
+                                        src={getIcon(`${difficulty}.webp`)}
+                                        alt={`${difficulty} difficulty`}
+                                        class="h-full w-full object-contain"
+                                        loading="lazy"
+                                    />
+                                </div>
                             </label>
                         {/each}
                     </div>

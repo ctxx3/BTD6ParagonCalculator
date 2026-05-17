@@ -4,6 +4,9 @@
         "name": "Apex Plasma Master",
         "tower": "Dart",
         "image": "/icons/apex.webp",
+        "description": "Fill the area with Bloon shredding plasma juggernaut balls, leaving nothing behind...",
+        "xpRequirement": 500000,
+        "versionAdded": "27.0",
         "prices": {
             "easy": 127500,
             "medium": 150000,
@@ -16,42 +19,39 @@
         "name": "Glaive Dominus",
         "tower": "Boomerang",
         "image": "/icons/glaive.webp",
+        "description": "The Bloons will look upon my Glaives, and they will know fear.",
+        "xpRequirement": 500000,
+        "versionAdded": "27.0",
         "prices": {
-            "easy": 212500,
-            "medium": 250000,
-            "hard": 270000,
-            "impoppable": 300000
+            "easy": 318750,
+            "medium": 375000,
+            "hard": 405000,
+            "impoppable": 450000
         }
     },
     {
         "id": 2,
-        "name": "Crucible of Steel and Flame",
-        "tower": "Tack",
-        "image": "/icons/cyclone.webp",
+        "name": "Ascended Shadow",
+        "tower": "Ninja",
+        "image": "/icons/ascended.webp",
+        "description": "The complete assassin package for dealing with any Bloon threat.",
+        "xpRequirement": 500000,
+        "versionAdded": "28.0",
         "prices": {
-            "easy": 170000,
-            "medium": 200000,
-            "hard": 216000,
-            "impoppable": 240000
+            "easy": 425000,
+            "medium": 500000,
+            "hard": 540000,
+            "impoppable": 600000
         }
     },
     {
         "id": 3,
-        "name": "Nautic Siege Core",
-        "tower": "Sub",
-        "image": "/icons/nautic.webp",
-        "prices": {
-            "easy": 340000,
-            "medium": 400000,
-            "hard": 432000,
-            "impoppable": 480000
-        }
-    },
-    {
-        "id": 4,
         "name": "Navarch of the Seas",
         "tower": "Buccaneer",
         "image": "/icons/navarch.webp",
+        "description": "The greatest thing ever to float on water.",
+        "xpRequirement": 750000,
+        "versionAdded": "29.0",
         "prices": {
             "easy": 467500,
             "medium": 550000,
@@ -60,10 +60,28 @@
         }
     },
     {
+        "id": 4,
+        "name": "Master Builder",
+        "tower": "Engineer",
+        "image": "/icons/master.webp",
+        "description": "Monkey engineering developed to perfection. Can overclock other paragons, and creates three Mega Sentries that can build their own sentries.",
+        "xpRequirement": 750000,
+        "versionAdded": "32.0",
+        "prices": {
+            "easy": 552500,
+            "medium": 650000,
+            "hard": 702000,
+            "impoppable": 780000
+        }
+    },
+    {
         "id": 5,
         "name": "Goliath Doomship",
         "tower": "Ace",
         "image": "/icons/goliath.webp",
+        "description": "A flying shadow of darkness spells Bloon obliteration.",
+        "xpRequirement": 1000000,
+        "versionAdded": "33.0",
         "prices": {
             "easy": 765000,
             "medium": 900000,
@@ -76,6 +94,54 @@
         "name": "Magus Perfectus",
         "tower": "Wizard",
         "image": "/icons/magus.webp",
+        "description": "Only the most perfect Wizard can channel the ancient powers of the beyond.",
+        "xpRequirement": 1000000,
+        "versionAdded": "37.0",
+        "prices": {
+            "easy": 680000,
+            "medium": 800000,
+            "hard": 864000,
+            "impoppable": 960000
+        }
+    },
+    {
+        "id": 7,
+        "name": "Nautic Siege Core",
+        "tower": "Sub",
+        "image": "/icons/nautic.webp",
+        "description": "Unfathomable range, power, and synergies with all other Monkey Towers and Heroes put all Bloons under assault.",
+        "xpRequirement": 1000000,
+        "versionAdded": "41.0",
+        "prices": {
+            "easy": 340000,
+            "medium": 400000,
+            "hard": 432000,
+            "impoppable": 480000
+        }
+    },
+    {
+        "id": 8,
+        "name": "Crucible of Steel and Flame",
+        "tower": "Tack",
+        "image": "/icons/cyclone.webp",
+        "description": "Spinning blades of Bloon immolation!",
+        "xpRequirement": 500000,
+        "versionAdded": "46.0",
+        "prices": {
+            "easy": 170000,
+            "medium": 200000,
+            "hard": 216000,
+            "impoppable": 240000
+        }
+    },
+    {
+        "id": 9,
+        "name": "Mega Massive Munitions Factory",
+        "tower": "Spike",
+        "image": "/icons/mega.webp",
+        "description": "A factory of explosive spike Bloon annihilation.",
+        "xpRequirement": 1000000,
+        "versionAdded": "48.0",
         "prices": {
             "easy": 637500,
             "medium": 750000,
@@ -84,39 +150,48 @@
         }
     },
     {
-        "id": 7,
-        "name": "Ascended Shadow",
-        "tower": "Ninja",
-        "image": "/icons/ascended.webp",
+        "id": 10,
+        "name": "Ballistic Obliteration Missile Bunker",
+        "tower": "Bomb",
+        "image": "/icons/bomb.webp",
+        "description": "Cluster explosions, anti-MOAB explosions, Bloon stunning explosions, knockback explosions. BOMB has it all!",
+        "xpRequirement": 750000,
+        "versionAdded": "51.0",
         "prices": {
-            "easy": 425000,
-            "medium": 500000,
-            "hard": 540000,
-            "impoppable": 600000
+            "easy": 510000,
+            "medium": 600000,
+            "hard": 648000,
+            "impoppable": 720000
         }
     },
     {
-        "id": 8,
-        "name": "Mega Massive Munitions Factory",
-        "tower": "Spike",
-        "image": "/icons/spike.webp",
+        "id": 11,
+        "name": "Herald of Everfrost",
+        "tower": "Ice",
+        "image": "/icons/herald.webp",
+        "description": "As the eternal frost descends and cold reigns supreme, even the baddest of Bloons are helpless against its icy grasp.",
+        "xpRequirement": 750000,
+        "versionAdded": "52.0",
         "prices": {
-            "easy": 680000,
-            "medium": 800000,
-            "hard": 864000,
-            "impoppable": 9600000
+            "easy": 255000,
+            "medium": 300000,
+            "hard": 324000,
+            "impoppable": 360000
         }
     },
     {
-        "id": 9,
-        "name": "Master Builder",
-        "tower": "Engineer",
-        "image": "/icons/master.webp",
+        "id": 12,
+        "name": "Root of all Nature",
+        "tower": "Druid",
+        "image": "/icons/root.webp",
+        "description": "That from which all life branches.",
+        "xpRequirement": 750000,
+        "versionAdded": "54.0",
         "prices": {
-            "easy": 552500,
-            "medium": 650000,
-            "hard": 702000,
-            "impoppable": 780000
+            "easy": 403750,
+            "medium": 475000,
+            "hard": 513000,
+            "impoppable": 570000
         }
     }
 ]
