@@ -44,16 +44,14 @@
             label: "Upgrades",
             min: 0,
             max: 100,
-            tooltip:
-                "All upgrade tiers spent on towers excluding Tier 5s.",
+            tooltip: "All upgrade tiers spent on towers excluding Tier 5s.",
         },
         {
             key: "popCount",
             label: "Pop Count",
             min: 0,
             max: 16200000,
-            tooltip:
-                "Bloons popped from every tower of the paragon type.",
+            tooltip: "Bloons popped from every tower of the paragon type.",
         },
         {
             key: "cashSpent",
@@ -142,7 +140,6 @@
         };
     }
 
-    // Compute dynamic max values for fields (cashInjections depends on selected tower & difficulty)
     function getFieldMax(key: string) {
         if (key === "cashInjections") {
             const tower = towers.find((t) => t.id === formData.selectedTower);
@@ -160,7 +157,6 @@
         return field?.max ?? 0;
     }
 
-    // Ensure cashInjections value doesn't exceed dynamic max when tower/difficulty changes
     $effect(() => {
         const max = getFieldMax("cashInjections");
         if (formData.cashInjections > max) {
@@ -225,7 +221,7 @@
                                     class="sr-only"
                                 />
                                 <div
-                                    class={`bg-darker-blue w-full aspect-[1/1] rounded-lg border-2 transition-all duration-150 flex items-center justify-center p-1 ${formData.selectedTower === tower.id ? "border-gold ring-2 ring-gold scale-105" : "border-gold hover:border-gold"}`}
+                                    class={`bg-darker-blue w-full aspect-square rounded-lg border-2 border-gold transition-all duration-150 flex items-center justify-center p-1 ${formData.selectedTower === tower.id ? "ring-2 ring-gold scale-105" : ""}`}
                                 >
                                     <enhanced:img
                                         src={getTowerIcon(tower.image)}
@@ -260,8 +256,7 @@
                             class="font-medium mb-1 text-stroke"
                             >Difficulty</label
                         >
-                        <span
-                            class="text-[#00DDFF] text-stroke"
+                        <span class="text-accent text-stroke"
                             >{formData.difficulty}</span
                         >
                     </div>
@@ -278,7 +273,7 @@
                                     class="sr-only"
                                 />
                                 <div
-                                    class={`bg-darker-blue w-full aspect-square rounded-lg border-2 transition-all duration-150 flex items-center justify-center p-1 ${formData.difficulty === difficulty ? "border-gold ring-2 ring-gold scale-105" : "border-gold hover:border-gold"}`}
+                                    class={`bg-darker-blue w-full aspect-square rounded-lg border-2 border-gold transition-all duration-150 flex items-center justify-center p-1 ${formData.difficulty === difficulty ? "ring-2 ring-gold scale-105" : ""}`}
                                 >
                                     <enhanced:img
                                         src={getIcon(`${difficulty}.webp`)}
@@ -294,7 +289,11 @@
                 {#each inputFields as field}
                     <div class="flex flex-col">
                         <Slider
-                            bind:value={formData[field.key as keyof typeof formData] as number}
+                            bind:value={
+                                formData[
+                                    field.key as keyof typeof formData
+                                ] as number
+                            }
                             max={getFieldMax(field.key)}
                             label={field.label}
                             description={field.tooltip}
@@ -314,11 +313,11 @@
                     Calculation Results
                 </h2>
                 <div
-                    class="p-3 bg-gradient-to-r bg-darker-blue rounded-lg mb-2 flex flex-col items-center"
+                    class="p-3 bg-linear-to-r bg-darker-blue rounded-lg mb-2 flex flex-col items-center"
                 >
                     <div class="text-base font-medium">Estimated Degree</div>
                     <div
-                        class="text-3xl font-extrabold tracking-tight text-[#00DDFF]"
+                        class="text-3xl font-extrabold tracking-tight text-accent"
                     >
                         {results.level}
                     </div>
@@ -328,7 +327,7 @@
                         class="p-2 bg-darker-blue rounded-lg flex flex-col items-center"
                     >
                         <div class="text-xs font-medium">Current Power</div>
-                        <div class="text-lg font-semibold text-[#00DDFF]">
+                        <div class="text-lg font-semibold text-accent">
                             {results.currDegree.toLocaleString()}
                         </div>
                     </div>
@@ -336,7 +335,7 @@
                         class="p-2 bg-darker-blue rounded-lg flex flex-col items-center"
                     >
                         <div class="text-xs font-medium">Progress to Next</div>
-                        <div class="text-lg font-semibold text-[#00DDFF]">
+                        <div class="text-lg font-semibold text-accent">
                             {results.nextDegree?.toLocaleString()}
                         </div>
                     </div>

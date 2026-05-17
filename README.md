@@ -1,16 +1,18 @@
-# 🎯 BTD6 Paragon Calculator
+# BTD6 Paragon Calculator
 
 [![GitHub stars](https://img.shields.io/github/stars/ctxx3/BTD6ParagonCalculator?style=flat-square)](https://github.com/ctxx3/BTD6ParagonCalculator/stargazers)
 [![License](https://img.shields.io/github/license/ctxx3/BTD6ParagonCalculator?style=flat-square)](LICENSE)
 [![Deploy](https://img.shields.io/github/deployments/ctxx3/BTD6ParagonCalculator/github-pages?label=deployed&style=flat-square)](https://ctxx3.github.io/BTD6ParagonCalculator/)
 
-A blazing-fast, SvelteKit-powered calculator for BTD6 Paragon degrees.
+A SvelteKit calculator for BTD6 Paragon degrees.
 
 > **Forked from [Kaister300/BTD6ParagonCalculator](https://github.com/Kaister300/BTD6ParagonCalculator). This fork features a complete SvelteKit rewrite and improved UX.**
 
+![Screenshot of BTD6 Paragon Calculator](https://raw.githubusercontent.com/ctxx3/BTD6ParagonCalculator/main/.github/screenshot.webp)
+
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 Clone and run locally with [bun](https://bun.sh):
 
@@ -27,44 +29,37 @@ Build for production:
 bun run build
 ```
 
-> Prefer npm or yarn? Swap out `bun` for your favorite Node.js package manager!
+---
+
+## Features
+
+- Supports all 13 current paragons (as of version 54.0)
+- Responsive design, works on mobile
+- TypeScript for type safety, Tailwind CSS for styling
 
 ---
 
-## �️ Preview
-
-![Screenshot of BTD6 Paragon Calculator](https://raw.githubusercontent.com/ctxx3/BTD6ParagonCalculator/main/.github/screenshot.png)
-
----
-
-## ✨ Features
-
-- � **Modern SvelteKit frontend**
-- 🛡️ **TypeScript** for type safety
-- 🎨 **Tailwind CSS** for responsive UI
-- ⚡ **Instant feedback** and smooth user experience
-
----
-
-## � Project Structure
+## Project Structure
 
 ```
-.
-├── src/           # SvelteKit source code
-├── static/        # Static assets (icons, JSON, etc.)
-├── package.json   # Project metadata and scripts
-└── README.md      # This file
+src/
+├── routes/+page.svelte      # main calculator UI
+├── components/slider.svelte # custom range slider
+├── lib/paragon-calc.ts      # degree calculation logic
+└── app.css                  # global styles + Tailwind theme
+static/
+└── json/paragons.json       # tower data (prices, names)
 ```
 
 ---
 
-## 🙏 Credits
+## Credits
 
 - Original project by [Kaister300](https://github.com/Kaister300/BTD6ParagonCalculator)
 - Fork & SvelteKit rewrite by [Ctx3](https://github.com/ctxx3)
 
 ---
 
-## 📄 License
+## License
 
 MIT License. See [LICENSE](LICENSE) for details.

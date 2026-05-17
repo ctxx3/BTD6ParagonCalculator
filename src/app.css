@@ -70,6 +70,7 @@ body::before {
     --color-darker-blue: #2D496F;
     --color-gold: #FFD000;
     --color-bg: #6598D9;
+    --color-accent: #00DDFF;
 }
 
 /* Minimal vendor styles for the range thumb (keeps custom thumb image and basic shadow) */
