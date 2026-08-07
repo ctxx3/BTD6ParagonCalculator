@@ -68,10 +68,10 @@
         "xpRequirement": 750000,
         "versionAdded": "32.0",
         "prices": {
-            "easy": 552500,
-            "medium": 650000,
-            "hard": 702000,
-            "impoppable": 780000
+            "easy": 510000,
+            "medium": 600000,
+            "hard": 648000,
+            "impoppable": 720000
         }
     },
     {
@@ -158,10 +158,10 @@
         "xpRequirement": 750000,
         "versionAdded": "51.0",
         "prices": {
-            "easy": 510000,
-            "medium": 600000,
-            "hard": 648000,
-            "impoppable": 720000
+            "easy": 552500,
+            "medium": 650000,
+            "hard": 702000,
+            "impoppable": 780000
         }
     },
     {
