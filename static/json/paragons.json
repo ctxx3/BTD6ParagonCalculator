@@ -68,10 +68,10 @@
         "xpRequirement": 750000,
         "versionAdded": "32.0",
         "prices": {
-            "easy": 510,000,
-            "medium": 600,000,
-            "hard": 648,000,
-            "impoppable": 720,000
+            "easy": 510000,
+            "medium": 600000,
+            "hard": 648000,
+            "impoppable": 720000
         }
     },
     {
